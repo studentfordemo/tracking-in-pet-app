@@ -41,6 +41,7 @@ export default class Searchscreen extends React.Component {
           })
         })
       }
+      
   }
 
     searchTransactions= async(text) =>{
@@ -48,7 +49,7 @@ export default class Searchscreen extends React.Component {
       var text = text.toLowerCase()
   
       
-      if (enteredText[0].toLowerCase() ==='g'){
+      if (enteredText[0].toLowerCase() ==='g'||enteredText[0].toLowerCase() ==='a'){
         const transaction =  await db.collection("pets_to_donate").where('petbreed','==',text).get()
         transaction.docs.map((doc)=>{
           this.setState({
@@ -65,6 +66,9 @@ export default class Searchscreen extends React.Component {
             lastVisibleTransaction: doc
           })
         })
+      }
+      else{
+        alert("sorry the breed that u r lookin for is not available")
       }
     }
     renderItem = ( {item, i} ) =>{
