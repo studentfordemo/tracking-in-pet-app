@@ -11,10 +11,11 @@ export default class DonorDetailsScreen extends Component{
     this.state={
       userId          : firebase.auth().currentUser.email,
       DonorId      : this.props.navigation.getParam('details')["user_id"],
-      requestId       : this.props.navigation.getParam('details')["request_id"],
-      petAge       : this.props.navigation.getParam('details')["petAge"],
-      description    : this.props.navigation.getParam('details')["description"],
-      petbreed       :this.props.navigation.getParam('details')["petbreed"],
+     requestId       : this.props.navigation.getParam('details')["request_id"],
+     petAge       : this.props.navigation.getParam('details')["petAge"],
+     
+     petbreed       :this.props.navigation.getParam('details')["petbreed"],
+     image:this.props.navigation.getParam('details')["image"],
       donorName    : '',
       donorContact : '',
       donorAddress : '',
@@ -81,9 +82,7 @@ componentDidMount(){
             <Card>
               <Text style={{fontWeight:'bold'}}>PetBreed : {this.state.petbreed}</Text>
             </Card>
-            <Card>
-              <Text style={{fontWeight:'bold'}}>Description : {this.state.description}</Text>
-            </Card>
+            
           </Card>
         </View>
         <View style={{flex:0.3}}>
@@ -110,7 +109,7 @@ componentDidMount(){
                   style={styles.button}
                   onPress={()=>{
                     this.updatePetStatus()
-                    this.props.navigation.navigate('MyAdoptions')
+                  
                   }}>
                 <Text>I want to Adopt</Text>
               </TouchableOpacity>

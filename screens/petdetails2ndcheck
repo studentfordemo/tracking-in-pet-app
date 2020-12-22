@@ -120,7 +120,7 @@ export default class PetDetailsScreen extends React.Component {
     render() {
       return (
         <View style={styles.container}>
-          <MyHeader title="Adopt a pet" navigation ={this.props.navigation}/>
+          <MyHeader title="Donate Books" navigation ={this.props.navigation}/>
           <View style={styles.searchBar}>
         <TextInput 
           style ={styles.bar}

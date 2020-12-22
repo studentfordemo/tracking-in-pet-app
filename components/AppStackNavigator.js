@@ -8,7 +8,7 @@ import DonorDetailsScreen  from '../screens/DonorDetailsScreen';
 
 
 export const AppStackNavigator = createStackNavigator({
-    PetDetails  : {
+  PetDetailsScreen  : {
     screen : PetDetailsScreen,
     navigationOptions:{
       headerShown : false
@@ -23,6 +23,6 @@ export const AppStackNavigator = createStackNavigator({
 
 },
   {
-    initialRouteName: 'PetDetails '
+    initialRouteName: 'PetDetailsScreen '
   }
 );
