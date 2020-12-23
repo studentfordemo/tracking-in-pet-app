@@ -1,4 +1,4 @@
-import React,{Component}from 'react';
+import React from 'react';
 import {
     View,
     Text,
@@ -9,14 +9,12 @@ import {
     TouchableOpacity,
     Alert,
     ScrollView} from 'react-native';
-
-
-import db from '../config';
+    import db from '../config';
 import firebase from 'firebase';
 
 
 
-export default class WelcomeScreen extends Component{
+export default class SignUpLogin extends React.Component{
   constructor(){
     super();
     this.state={
@@ -33,7 +31,7 @@ export default class WelcomeScreen extends Component{
 
   userSignUp = (emailId, password,confirmPassword) =>{
    if(password !== confirmPassword){
-       return Alert.alert("password doesn't match\nCheck your password.")
+       return Alert.alert("password doesn't match! Check your password.")
    }else{
      firebase.auth().createUserWithEmailAndPassword(emailId, password)
      .then(()=>{
@@ -42,7 +40,8 @@ export default class WelcomeScreen extends Component{
          last_name:this.state.lastName,
          contact:this.state.contact,
          email_id:this.state.emailId,
-         address:this.state.address
+         address:this.state.address,
+         isBookRequestActive : false
        })
        return  Alert.alert(
             'User Added Successfully',
@@ -64,7 +63,7 @@ export default class WelcomeScreen extends Component{
 userLogin = (emailId, password)=>{
    firebase.auth().signInWithEmailAndPassword(emailId, password)
    .then(()=>{
-     this.props.navigation.navigate('PetDetails')
+     this.props.navigation.navigate('HomeScreen')
    })
    .catch((error)=> {
      var errorCode = error.code;
@@ -189,9 +188,7 @@ showModal = ()=>{
             this.showModal()
           }
         <View style={{justifyContent:'center', alignItems:'center'}}>
-          
-          
-          <Text style={styles.title}>Book Santa</Text>
+          <Text style={styles.title}> Barter System </Text>
         </View>
         <View>
             <TextInput
