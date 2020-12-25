@@ -8,9 +8,11 @@ import db from '../config.js';
 export default class DonorDetailsScreen extends Component{
   constructor(props){
     super(props);
+    
     this.state={
-      userId          : firebase.auth().currentUser.email,
-      DonorId      : this.props.navigation.getParam('details')["user_id"],
+      userId          : firebase.auth().currentUser.email ,
+      userName        : "",
+      DonorId      :this.props.navigation.getParam('details')["user_id"],
      requestId       : this.props.navigation.getParam('details')["request_id"],
      petAge       : this.props.navigation.getParam('details')["petAge"],
      
@@ -54,10 +56,34 @@ updatePetStatus=()=>{
   })
 }
 
+getUserDetails=(userId)=>{
+  db.collection("users").where('email_id','==', userId).get()
+  .then((snapshot)=>{
+    snapshot.forEach((doc) => {
+      this.setState({
+        userName  :doc.data().first_name + " " + doc.data().last_name
+      })
+    })
+  })
+}
 
-
+addNotification=()=>{
+  var message = this.state.userName + " has shown interest in Adopting a pet"
+  db.collection("all_notifications").add({
+    "targeted_user_id"    : this.state.DonorId,
+    "adoptor_id"            : this.state.userId,
+    "request_id"          : this.state.requestId,
+    "petAge"           : this.state.petAge,
+    "petbreed"           : this.state.petbreed,
+    "date"                : firebase.firestore.FieldValue.serverTimestamp(),
+    "notification_status" : "unread",
+    "message"             : message
+  })
+}
 componentDidMount(){
   this.getDonorDetails()
+  this.getUserDetails(this.state.userId)
+  
 }
 
 
@@ -66,12 +92,28 @@ componentDidMount(){
       <View style={styles.container}>
         <View style={{flex:0.1}}>
           <Header
-            leftComponent ={<Icon name='arrow-left' type='feather' color='#696969'  onPress={() => this.props.navigation.goBack()}/>}
+            leftComponent ={<Icon name='arrow-left' type='feather' color='#696969'  onPress={() =>    this.props.navigation.navigate('PetDetails')}/>}
             centerComponent={{ text:"Adopt Pets", style: { color: '#90A5A9', fontSize:20,fontWeight:"bold", } }}
             backgroundColor = "#eaf8fe"
           />
         </View>
-        <View style={{flex:0.3}}>
+        <View style={{flex:1}}>
+          {
+            this.state.userId === null ||
+            this.state.DonorId === null ||
+            this.state.requestId === null ||
+            this.state.petAge === null ||
+            this.state.petbreed === null ||
+            this.state.image === null
+
+            ?(
+              <View style={styles.subContainer}>
+                <Text style={{ fontSize: 20}}>List Of All Received Books</Text>
+              </View>
+            )
+            :(
+              <View>
+              <View style={{flex:0.3}}>
           <Card
               title={"Pet Information"}
               titleStyle= {{fontSize : 20}}
@@ -101,7 +143,13 @@ componentDidMount(){
             </Card>
           </Card>
         </View>
-        <View style={styles.buttonContainer}>
+ </View>
+            )
+          }
+        </View>
+
+
+               <View style={styles.buttonContainer}>
           {
             this.state.DonorId !== this.state.userId
             ?(
@@ -109,6 +157,8 @@ componentDidMount(){
                   style={styles.button}
                   onPress={()=>{
                     this.updatePetStatus()
+                    this.addNotification()
+                    this.props.navigation.navigate('Home')
                   
                   }}>
                 <Text>I want to Adopt</Text>

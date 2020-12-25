@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import PetDetailsScreen from '../screens/PetDetailsScreen';
 import PetDonateScreen from '../screens/PetDonateScreen';
-import { AppStackNavigator } from './AppStackNavigator'
+import  SwitchNavigation  from './AppStackNavigator'
 
 
 export const AppTabNavigator = createBottomTabNavigator({

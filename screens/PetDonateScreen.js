@@ -101,7 +101,7 @@ var imageName=image+this.createUniqueId();
   render(){
     return(
         <View style={{flex:1}}>
-      <MyHeader title="Donate A Pet" navigation ={this.props.navigation}/>
+      <MyHeader title="Donate a Pet" navigation ={this.props.navigation}/>
             <KeyboardAvoidingView style={styles.keyBoardStyle}>
           
             <Avatar

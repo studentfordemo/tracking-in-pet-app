@@ -6,6 +6,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import { AppTabNavigator } from './components/AppTabNavigator'
 import { AppDrawerNavigator } from './components/AppDrawerNavigator'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import DonorDetailsScreen  from './screens/DonorDetailsScreen';
 
 function Demo() {
   return (
@@ -33,6 +34,8 @@ const switchNavigator = createSwitchNavigator({
   WelcomeScreen:{screen: WelcomeScreen},
   Drawer:{screen: AppDrawerNavigator},
   BottomTab: {screen: AppTabNavigator},
+  DonorDetailsScreen:{screen:DonorDetailsScreen}
+  
 })
 
 const AppContainer =  createAppContainer(switchNavigator);

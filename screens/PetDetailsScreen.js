@@ -23,7 +23,7 @@ export default class PetDetailsScreen extends React.Component {
       var enteredText = text.split("")
 
       
-      if (enteredText[0].toLowerCase() ==='g'){
+      if (enteredText[0].toLowerCase() ==='a'||"b"||"c"||"d"||"e"||"f"||"g"||"h"||"i"||"j"||"k"||"l"){
       const query = await db.collection("pets_to_donate").where('petbreed','==',text).startAfter(this.state.lastVisibleTransaction).limit(10).get()
       query.docs.map((doc)=>{
         this.setState({
@@ -32,7 +32,7 @@ export default class PetDetailsScreen extends React.Component {
         })
       })
     }
-      else if(enteredText[0].toLowerCase() === 'c'){
+      else if(enteredText[0].toLowerCase() === 'm'||"n"||"o"||"p"||"q"||"r"||"s"||"t"||"u"||"v"||"w"||"x"||"y"||"z"){
         const query = await db.collection("pets_to_donate").where('petbreed','==',text).startAfter(this.state.lastVisibleTransaction).limit(10).get()
         query.docs.map((doc)=>{
           this.setState({
@@ -49,7 +49,7 @@ export default class PetDetailsScreen extends React.Component {
       var text = text.toLowerCase()
   
       
-      if (enteredText[0].toLowerCase() ==='g'||enteredText[0].toLowerCase() ==='a'){
+      if (enteredText[0].toLowerCase() ==='a'||"b"||"c"||"d"||"e"||"f"||"g"||"h"||"i"||"j"||"k"||"l"){
         const transaction =  await db.collection("pets_to_donate").where('petbreed','==',text).get()
         transaction.docs.map((doc)=>{
           this.setState({
@@ -58,7 +58,7 @@ export default class PetDetailsScreen extends React.Component {
           })
         })
       }
-      else if(enteredText[0].toLowerCase() === 'c'){
+      else if(enteredText[0].toLowerCase() === 'm'||"n"||"o"||"p"||"q"||"r"||"s"||"t"||"u"||"v"||"w"||"x"||"y"||"z"){
         const transaction = await db.collection('pets_to_donate').where('petbreed','==',text).get()
         transaction.docs.map((doc)=>{
           this.setState({
@@ -93,7 +93,7 @@ export default class PetDetailsScreen extends React.Component {
               <TouchableOpacity style={styles.button}
               
               onPress ={()=>{
-                this.props.navigation.navigate("DonorDetails",{"details": item})
+                this.props.navigation.navigate("DonorDetailsScreen",{"details": item})
               }}>
                 <Text style={{color:'green'}}>View</Text>
               </TouchableOpacity>
@@ -120,7 +120,7 @@ export default class PetDetailsScreen extends React.Component {
     render() {
       return (
         <View style={styles.container}>
-          <MyHeader title="Adopt a pet" navigation ={this.props.navigation}/>
+          <MyHeader title="Adopt a Pet" navigation ={this.props.navigation}/>
           <View style={styles.searchBar}>
         <TextInput 
           style ={styles.bar}
